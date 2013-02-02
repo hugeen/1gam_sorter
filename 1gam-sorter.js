@@ -19,5 +19,12 @@
     s.setAttribute('rel', 'stylesheet');
     s.setAttribute('type', 'text/css');
     document.getElementsByTagName('head')[0].appendChild(s);
-
+    
+    
+    $(function() {
+       
+       $("body").attr({ "ng-app": "sorter" });   
+        
+    });
+    
 })();

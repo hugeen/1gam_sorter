@@ -30,23 +30,37 @@
         });
         
         var games = [];
+        var $games = $(".gadiv");
+        var totalGames = $games.length;
+        var processedGames = 0;
         
-        $(".gadiv").each(function() {
+        $("body").append("<div id='waitForDataProcessingOverlay'>"+
+            "<div id='waitForDataProcessing'>Wait for data processing</div>"+
+            "<div id='gameProcessed'><span>0</span>/<span>0</span> games processed</div>"+
+        "</div>");
+        
+        $games.each(function() {
             var div = $(this);
             games.push({
-                div: div,
+                div: div.clone(),
+                link: div.find(".ga").attr("href"),
+                title: div.find(".ga").attr("title"),
                 name: div.find(".ganame").text(),
                 description: div.find(".gabyli").text(),
                 credits: div.find(".gacred").text(),
                 tags: div.find(".gatags").text(),
                 about: div.find(".gabout").text(),
-                author: div.find(".gauser a").text()
+                author: div.find(".gauser a").text(),
+                icon: div.find(".ga").attr("src")
             });
+            div.remove();
+            processedGames++;
         });
         
-        console.log(games);
+        $(".walloftext").append("")
+        
         window.sorterCtrl = function($scope) {
-            
+            $scope.games = games;
         }
         
     }

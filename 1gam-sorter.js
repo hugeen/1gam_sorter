@@ -20,8 +20,19 @@
     s.setAttribute('type', 'text/css');
     document.getElementsByTagName('head')[0].appendChild(s);
 
-
-    window.onload = function() {
+    if(typeof $ !== "undefined") {
+        loadOnce();
+    } else {
+        window.onload = function() { loadOnce() };
+    }
+    
+    
+    function loadOnce() {
+        
+        if (typeof window.sorterLoaded !== "undefined") {
+            return false;
+        }
+        window.sorterLoaded = true;
         
         var module = angular.module('sorter', []);
         
@@ -62,7 +73,8 @@
         window.sorterCtrl = function($scope) {
             $scope.games = games;
         }
+
+    }    
         
-    }
 
 })();

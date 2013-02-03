@@ -47,10 +47,11 @@
         
         $("body").append("<div id='waitForDataProcessingOverlay'>"+
             "<div id='waitForDataProcessing'>Wait for data processing</div>"+
-            "<div id='gameProcessed'><span>0</span>/<span>0</span> games processed</div>"+
+            "<div id='gameProcessed'><span id='gamesProcessedNumber'>"+processedGames+"</span>/<span id='gamesTotalNumber'>"+totalGames+"</span> games processed</div>"+
         "</div>");
         
         $games.each(function() {
+            
             var div = $(this);
             games.push({
                 div: div.clone(),
@@ -64,8 +65,15 @@
                 author: div.find(".gauser a").text(),
                 icon: div.find(".ga").attr("src")
             });
+            
             div.remove();
             processedGames++;
+            if(processedGames < totalGames) {
+                $("#gamesProcessedNumber").text(processedGames);   
+            } else {
+                $("#waitForDataProcessingOverlay").remove();
+            }
+            
         });
         
         $(".walloftext").append("")

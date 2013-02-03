@@ -63,11 +63,13 @@
                 tags: div.find(".gatags").text(),
                 about: div.find(".gabout").text(),
                 author: div.find(".gauser a").text(),
+                authorLink: div.find(".gauser a").attr("href"),
                 icon: div.find(".ga").attr("src")
             });
             
             div.remove();
             processedGames++;
+            console.log(processedGames, totalGames);
             if(processedGames < totalGames) {
                 $("#gamesProcessedNumber").text(processedGames);   
             } else {
@@ -76,11 +78,28 @@
             
         });
         
-        $(".walloftext").append("")
-        
-        window.sorterCtrl = function($scope) {
-            $scope.games = games;
+        window.SorterCtrl = function($scope) {
+            $scope.games = [games[0],games[1], games[2]];
         }
+        
+        var template = '<div class="gadiv" ng-repeat="game in games">'+
+            '<a class="ga" title="{{ game.title }}" href="{{ game.link }}">'+
+                '<img class="gaicon" src="{{ game.icon }}">'+
+                '<span class="ganame">{{ game.name }}</span>'+
+                '<span class="gabyli">{{ game.description }}</span>'+
+                '<span class="gacred">{{ game.credits }}</span>'+
+                '<span class="gatags">{{ game.tags }}</span>'+
+                '<span class="gabout">{{ game.about }}</span>'+
+            '</a>'+
+            '<span class="gauser">'+
+                '<a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a>'+
+            '</span>'+
+        '</div>';
+        
+        $(".gadiv").remove();
+        $(".walloftext").html("<h1>Filter by tag</h1>");
+        $(".walloftext").attr({ "ng-controller": "SorterCtrl" });
+        $(".walloftext").append(template);
 
     }    
         

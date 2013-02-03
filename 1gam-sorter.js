@@ -1,24 +1,25 @@
 (function() {
-
-    var s = document.createElement('script');
-    s.setAttribute('src', 'http://code.jquery.com/jquery-1.9.0.min.js');
-    document.getElementsByTagName('body')[0].appendChild(s);
-
-    var s = document.createElement('script');
-    s.setAttribute('src', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js');
-    document.getElementsByTagName('body')[0].appendChild(s);
-
-    var s = document.createElement('link');
-    s.setAttribute('href', 'http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
-    s.setAttribute('rel', 'stylesheet');
-    s.setAttribute('type', 'text/css');
-    document.getElementsByTagName('head')[0].appendChild(s);
-
-    var s = document.createElement('link');
-    s.setAttribute('href', 'http://hugeen.github.com/1gam_sorter/1gam-sorter.css');
-    s.setAttribute('rel', 'stylesheet');
-    s.setAttribute('type', 'text/css');
-    document.getElementsByTagName('head')[0].appendChild(s);
+    
+    function injectScript(script) {
+        var s = document.createElement('script');
+        s.setAttribute('src', script);
+        document.getElementsByTagName('body')[0].appendChild(s);
+    }
+    
+    function injectCss(css) {
+        var s = document.createElement('link');
+        s.setAttribute('href', css);
+        s.setAttribute('rel', 'stylesheet');
+        s.setAttribute('type', 'text/css');
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    
+    injectScript('http://code.jquery.com/jquery-1.9.0.min.js');
+    injectScript('http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js');
+    injectScript('http://documentcloud.github.com/underscore/underscore.js');
+    
+    injectCss('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
+    injectCss('http://hugeen.github.com/1gam_sorter/1gam-sorter.css');
 
     if(typeof $ !== "undefined") {
         loadOnce();
@@ -51,35 +52,45 @@
         "</div>");
         
         $games.each(function() {
-            
-            var div = $(this);
-            games.push({
-                div: div.clone(),
-                link: div.find(".ga").attr("href"),
-                title: div.find(".ga").attr("title"),
-                name: div.find(".ganame").text(),
-                description: div.find(".gabyli").text(),
-                credits: div.find(".gacred").text(),
-                tags: div.find(".gatags").text(),
-                about: div.find(".gabout").text(),
-                author: div.find(".gauser a").text(),
-                authorLink: div.find(".gauser a").attr("href"),
-                icon: div.find(".ga").attr("src")
-            });
-            
-            div.remove();
-            processedGames++;
-            console.log(processedGames, totalGames);
-            if(processedGames < totalGames) {
-                $("#gamesProcessedNumber").text(processedGames);   
-            } else {
-                $("#waitForDataProcessingOverlay").remove();
-            }
-            
+            var that = this;
+            setTimeout(function() {
+                var div = $(that);
+                games.push({
+                    div: div.clone(),
+                    link: div.find(".ga").attr("href"),
+                    title: div.find(".ga").attr("title"),
+                    name: div.find(".ganame").text(),
+                    description: div.find(".gabyli").text(),
+                    credits: div.find(".gacred").text(),
+                    tags: div.find(".gatags").text(),
+                    about: div.find(".gabout").text(),
+                    author: div.find(".gauser a").text(),
+                    authorLink: div.find(".gauser a").attr("href"),
+                    icon: div.find(".ga").attr("src")
+                });
+
+                div.remove();
+                processedGames++;
+                if(processedGames < totalGames) {
+                    $("#gamesProcessedNumber").text(processedGames);   
+                } else {
+                    $("#waitForDataProcessingOverlay").remove();
+                }
+            }, 25);
         });
         
         window.SorterCtrl = function($scope) {
             $scope.games = [games[0],games[1], games[2]];
+            $scope.tag = "";
+            $scope.filterByTag = function() {
+                if(_.isEmpty($scope.tag)) {
+                    $scope.games = games;
+                } else {
+                    $scope.games = _.filter(games, function(game) {
+                       return _.contains(games.tags, $scope.tag); 
+                    });
+                }
+            }
         }
         
         var template = '<div class="gadiv" ng-repeat="game in games">'+
@@ -97,7 +108,13 @@
         '</div>';
         
         $(".gadiv").remove();
-        $(".walloftext").html("<h1>Filter by tag</h1>");
+        $(".walloftext").html('<h1> Filter by tag'+
+            '<form ng-submit="filterByTag()">'+
+                '<input type="text" ng-model="tag" size="30">'+
+                '<input type="submit" value="Filter">'+
+            '</form>'+
+        '</h1>');
+
         $(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         $(".walloftext").append(template);
 

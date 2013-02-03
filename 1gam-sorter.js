@@ -91,7 +91,7 @@
                 } else {
                     var matcher = new RegExp($scope.tag,"i");
                     $scope.games = _.filter(games, function(game) {
-                       return matcher(game.tags); 
+                       return matcher.test(game.tags); 
                     });
                 }
             }

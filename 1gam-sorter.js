@@ -73,7 +73,7 @@
                 about: div.find(".gabout").text(),
                 author: div.find(".gauser a").text(),
                 authorLink: div.find(".gauser a").attr("href"),
-                icon: div.find(".ga").attr("src")
+                icon: div.find(".gaicon").attr("src")
             });
             
             div.remove();

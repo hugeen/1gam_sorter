@@ -54,7 +54,41 @@
             "<div id='gameProcessed'><span id='gamesProcessedNumber'>"+processedGames+"</span>/<span id='gamesTotalNumber'>"+totalGames+"</span> games processed</div>"+
         "</div>");
         
-        $games.each(function() {
+        function populateGames() {
+            
+            if($(".gadiv").length === 0) {
+                return false;
+            }
+            
+            var div = $(".gadiv").first();
+            
+            games.push({
+                div: div.clone(),
+                link: div.find(".ga").attr("href"),
+                title: div.find(".ga").attr("title"),
+                name: div.find(".ganame").text(),
+                description: div.find(".gabyli").text(),
+                credits: div.find(".gacred").text(),
+                tags: div.find(".gatags").text(),
+                about: div.find(".gabout").text(),
+                author: div.find(".gauser a").text(),
+                authorLink: div.find(".gauser a").attr("href"),
+                icon: div.find(".ga").attr("src")
+            });
+            
+            div.remove();
+            processedGames++;
+            if(processedGames < totalGames) {
+                $("#gamesProcessedNumber").text(processedGames);   
+            } else {
+                $("#waitForDataProcessingOverlay").remove();
+            }
+            
+            populateGames();
+            
+        }
+        
+        /*$games.each(function() {
             var that = this;
             setTimeout(function() {
                 var div = $(that);
@@ -80,7 +114,7 @@
                     $("#waitForDataProcessingOverlay").remove();
                 }
             }, 75);
-        });
+        });*/
         
         window.SorterCtrl = function($scope) {
             $scope.games = games;

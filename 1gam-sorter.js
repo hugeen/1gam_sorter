@@ -88,6 +88,7 @@
             
         }
         
+        populateGames();
         /*$games.each(function() {
             var that = this;
             setTimeout(function() {

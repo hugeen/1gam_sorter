@@ -79,7 +79,7 @@
                 } else {
                     $("#waitForDataProcessingOverlay").remove();
                 }
-            }, 25);
+            }, 75);
         });
         
         window.SorterCtrl = function($scope) {
@@ -89,8 +89,9 @@
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
                 } else {
+                    var matcher = new RegExp($scope.tag,"i");
                     $scope.games = _.filter(games, function(game) {
-                       return _.contains(game.tags, $scope.tag); 
+                       return matcher(game.tags); 
                     });
                 }
             }

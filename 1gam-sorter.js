@@ -1,9 +1,18 @@
 (function() {
     
+    var scriptsNumber = 0;
+    var scriptsLoaded = 0;
     function injectScript(script) {
+        scriptsNumber += 1;
         var s = document.createElement('script');
         s.setAttribute('src', script);
         document.getElementsByTagName('body')[0].appendChild(s);
+        s.onload = function() {
+            scriptsLoaded +=1;
+            if(scriptsNumber === scriptLoaded) {
+                loadOnce();
+            }
+        }
     }
     
     function injectCss(css) {
@@ -13,6 +22,7 @@
         s.setAttribute('type', 'text/css');
         document.getElementsByTagName('head')[0].appendChild(s);
     }
+
     
     injectScript('http://code.jquery.com/jquery-1.9.0.min.js');
     injectScript('http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js');
@@ -21,13 +31,6 @@
     injectCss('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
     injectCss('http://hugeen.github.com/1gam_sorter/1gam-sorter.css');
 
-    if(typeof $ !== "undefined") {
-        loadOnce();
-    } else {
-        window.onload = function() { loadOnce() };
-    }
-    
-    
     function loadOnce() {
         
         if (typeof window.sorterLoaded !== "undefined") {
@@ -80,14 +83,14 @@
         });
         
         window.SorterCtrl = function($scope) {
-            $scope.games = [games[0],games[1], games[2]];
+            $scope.games = games;
             $scope.tag = "";
             $scope.filterByTag = function() {
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
                 } else {
                     $scope.games = _.filter(games, function(game) {
-                       return _.contains(games.tags, $scope.tag); 
+                       return _.contains(game.tags, $scope.tag); 
                     });
                 }
             }
@@ -106,8 +109,7 @@
                 '<a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a>'+
             '</span>'+
         '</div>';
-        
-        $(".gadiv").remove();
+
         $(".walloftext").html('<h1> Filter by tag'+
             '<form ng-submit="filterByTag()">'+
                 '<input type="text" ng-model="tag" size="30">'+

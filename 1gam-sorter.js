@@ -9,7 +9,7 @@
         document.getElementsByTagName('body')[0].appendChild(s);
         s.onload = function() {
             scriptsLoaded +=1;
-            if(scriptsNumber === scriptLoaded) {
+            if(scriptsNumber === scriptsLoaded) {
                 loadOnce();
             }
         }

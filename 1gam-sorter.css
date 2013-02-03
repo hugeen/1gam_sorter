@@ -1,0 +1,27 @@
+#waitForDataProcessingOverlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: rgba(0,0,0,0.75);
+  color: white;
+}
+
+#waitForDataProcessing {
+  width: 100%;
+  height: 20px;
+  top: 50%;
+  margin-top: -10px;
+  position: fixed;
+  color: white;
+}
+
+#waitForDataProcessing {
+  width: 100%;
+  height: 20px;
+  top: 50%;
+  margin-top: 10px;
+  position: fixed;
+  color: white;
+}

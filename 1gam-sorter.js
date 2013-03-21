@@ -88,6 +88,7 @@ function initSorter(angular, _) {
         
         
         window.SorterCtrl = function($scope) {
+            console.log("test")
             $scope.games = games;
             $scope.tag = "";
             $scope.filterByTag = function() {

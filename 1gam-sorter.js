@@ -12,7 +12,11 @@ document.getElementsByTagName('head')[0].appendChild(s);
  */
  
 function initSorter(angular, _) {
-
+    
+    angular.element("body").attr({
+        "ng-app": ""
+    });
+    
     var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     
     // Remove the last h1
@@ -121,11 +125,8 @@ function initSorter(angular, _) {
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);
+
         
-        var module = angular.module('sorter', []);
-        angular.element("body").attr({
-            "ng-app": "sorter"
-        });
         
     }
     

@@ -49,17 +49,18 @@ function initSorter(angular, _) {
     
     var games = [];
     angular.forEach(gamesByMonth[0].games, function(game) {
+        var $game = angular.element(game);
         games.push({
-            link: game.find(".ga").attr("href"),
-            title: game.find(".ga").attr("title"),
-            name: game.find(".ganame").text(),
-            description: game.find(".gabyli").text(),
-            credits: game.find(".gacred").text(),
-            tags: game.find(".gatags").text(),
-            about: game.find(".gabout").text(),
-            author: game.find(".gauser a").text(),
-            authorLink: game.find(".gauser a").attr("href"),
-            icon: game.find(".gaicon").attr("src")
+            link: $game.find(".ga").attr("href"),
+            title: $game.find(".ga").attr("title"),
+            name: $game.find(".ganame").text(),
+            description: $game.find(".gabyli").text(),
+            credits: $game.find(".gacred").text(),
+            tags: $game.find(".gatags").text(),
+            about: $game.find(".gabout").text(),
+            author: $game.find(".gauser a").text(),
+            authorLink: $game.find(".gauser a").attr("href"),
+            icon: $game.find(".gaicon").attr("src")
         });
     });
     

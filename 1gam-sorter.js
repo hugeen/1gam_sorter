@@ -47,12 +47,11 @@ function initSorter(angular, _) {
         
     }
     
-    angular.element("#bootl").append("<a href='#' id='gamesProcessed'></a>");
+    angular.element("#bootl").append("<a href='https://github.com/hugeen/1gam_sorter' id='gamesProcessed'>1GAM Sorter: Processing games data.</a>");
     var games = [];
     
     var gamesProcessed = 0;
-    var procBy100 = 0;
-    
+
     angular.forEach(gamesByMonth, function(monthData) {
         
         _.defer(function() {
@@ -74,10 +73,8 @@ function initSorter(angular, _) {
                         month: monthData.month
                     });
                     gamesProcessed++;
-                    procBy100++;
-                    if(procBy100 === 100 || gamesProcessed === totalGames) {
-                        angular.element("#gamesProcessed").text(gamesProcessed+"/"+totalGames);
-                        procBy100 = 0
+                    if(gamesProcessed === totalGames) {
+                        angular.element("#gamesProcessed").text("1GAM Sorter: Ready!");
                     }
                 });
             });

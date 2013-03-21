@@ -105,21 +105,21 @@ function initSorter(angular, _) {
         }
         
         var template = 
-        '<table class="table table-striped">'+
-            '<thead>'+
-                '<tr>'+
-                    '<th>Name</td>'+
-                    '<th>Description</td>'+
-                    '<th>Tags</td>'+
-                    '<th>Author</a></td>'+
+        '<table class="table table-striped" width="768">'+
+            '<thead width="768">'+
+                '<tr width="768">'+
+                    '<th width="768">Name</td>'+
+                    '<th width="768">Description</td>'+
+                    '<th width="768">Tags</td>'+
+                    '<th width="768">Author</a></td>'+
                 '</tr>'+
             '</thead>'+
-            '<tbody>'+
-                '<tr ng-repeat="game in games">'+
-                    '<td><a href="{{ game.link }}">{{ game.name }}</a></td>'+
-                    '<td>{{ game.description }}</td>'+
-                    '<td>{{ game.tags }}</td>'+
-                    '<td><a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a></td>'+
+            '<tbody width="768">'+
+                '<tr width="768" ng-repeat="game in games">'+
+                    '<td width="768"><a href="{{ game.link }}">{{ game.name }}</a></td>'+
+                    '<td width="768">{{ game.description }}</td>'+
+                    '<td width="768">{{ game.tags }}</td>'+
+                    '<td width="768"><a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a></td>'+
                 '</tr>'+
             '</tbody>'+
         '</table>'+

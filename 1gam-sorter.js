@@ -108,9 +108,9 @@ function initSorter(angular, _) {
 
         '<div class="p result-blocks" ng-repeat="game in games">'+
             '<span><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
-            '<span>Description: {{ game.description }}</span><br>'+
-            '<span>Tags: {{ game.tags }}</span><br>'+
-            '<span><a href="{{ game.authorLink }}" title="Click to view author profile">By: {{ game.author }}</a></span>'+
+            '<span><b>Description:</b> {{ game.description }}</span><br>'+
+            '<span><b>Tags:</b> {{ game.tags }}</span><br>'+
+            '<span><a href="{{ game.authorLink }}" title="Click to view author profile"><b>By:</b> {{ game.author }}</a></span>'+
         '</div>';
         
         angular.element(".walloftext").html('<div class="h1">1GAM Sorter: Filter by tag</div>'+

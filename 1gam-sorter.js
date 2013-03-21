@@ -126,7 +126,7 @@ function initSorter(angular, _) {
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);
-
+        angular.bootstrap("body");
         
         
     }

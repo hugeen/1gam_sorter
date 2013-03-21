@@ -60,12 +60,12 @@ function initSorter(angular, _) {
                     var $game = angular.element(game);
                     games.push({
                         link: $game.find(".ga").attr("href"),
-                        title: $game.find(".ga").attr("title"),
+                        //title: $game.find(".ga").attr("title"),
                         name: $game.find(".ganame").text(),
                         description: $game.find(".gabyli").text(),
-                        credits: $game.find(".gacred").text(),
+                        //credits: $game.find(".gacred").text(),
                         tags: $game.find(".gatags").text(),
-                        about: $game.find(".gabout").text(),
+                        //about: $game.find(".gabout").text(),
                         author: $game.find(".gauser a").text(),
                         authorLink: $game.find(".gauser a").attr("href"),
                         icon: $game.find(".gaicon").first().data("original"),
@@ -107,7 +107,7 @@ function initSorter(angular, _) {
         var template = 
 
         '<div class="p result-blocks" ng-repeat="game in games">'+
-            '<span><img src="{{ game.icon }}" /><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
+            '<span><img src="{{ game.icon }}" /> {{ game.month }} - <a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
             '<span><b>Description:</b> {{ game.description }}</span><br>'+
             '<span><b>Tags:</b> {{ game.tags }}</span><br>'+
             '<span><a href="{{ game.authorLink }}" title="Click to view author profile"><b>By:</b> {{ game.author }}</a></span>'+

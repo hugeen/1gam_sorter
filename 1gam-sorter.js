@@ -107,8 +107,7 @@ function initSorter(angular, _) {
         var template = 
 
         '<div class="p result-blocks" ng-repeat="game in games">'+
-            '<img src="{{ game.icon }}" />'+
-            '<span><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
+            '<span><img src="{{ game.icon }}" /><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
             '<span><b>Description:</b> {{ game.description }}</span><br>'+
             '<span><b>Tags:</b> {{ game.tags }}</span><br>'+
             '<span><a href="{{ game.authorLink }}" title="Click to view author profile"><b>By:</b> {{ game.author }}</a></span>'+

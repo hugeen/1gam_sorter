@@ -13,7 +13,22 @@ document.getElementsByTagName('head')[0].appendChild(s);
  
 function initSorter(angular, _) {
     
-    console.log(angular, _);    
+    angular.element("body").attr({
+        "ng-app": "sorter"
+    });
+    
+    var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+    
+    // Remove the last h1
+    angular.element(".walloftext .h1:last").remove();
+    
+    var h1count = angular.element(".walloftext .h1").length;
+    var gamesByMonth = [];
+    for(var i = 0; i < h1count; i++) {
+        gamesByMonth.push(angular.element(".walloftext .h1:last ~ .gadiv"));
+        angular.element(".walloftext .h1:last").remove();
+    }
+    console.log(gamesByMonth);
     
 }
  

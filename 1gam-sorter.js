@@ -104,7 +104,26 @@ function initSorter(angular, _) {
             $scope.filterByTag();
         }
         
-        var template = '<div class="gadiv" ng-repeat="game in games">'+
+        var template = 
+        '<table class="table table-striped">'+
+            '<thead>'+
+                '<tr class="gadiv" ng-repeat="game in games">'+
+                    '<th>Name</td>'+
+                    '<th>Description</td>'+
+                    '<th>Tags</td>'+
+                    '<th>Author</a></td>'+
+                '</tr>'+
+            '</thead>'+
+            '<tbody>'+
+                '<tr class="gadiv" ng-repeat="game in games">'+
+                    '<td><a href="{{ game.link }}">{{ game.name }}</a></td>'+
+                    '<td>{{ game.description }}</td>'+
+                    '<td>{{ game.tags }}</td>'+
+                    '<td><a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a></td>'+
+                '</tr>'+
+            '</tbody>'+
+        '</table>'+
+        /*'<div class="gadiv" ng-repeat="game in games">'+
             '<a class="ga" title="{{ game.title }}" href="{{ game.link }}">'+
                 '<img class="gaicon" src="{{ game.icon }}">'+
                 '<span class="ganame">{{ game.name }}</span>'+
@@ -116,7 +135,7 @@ function initSorter(angular, _) {
             '<span class="gauser">'+
                 '<a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a>'+
             '</span>'+
-        '</div>';
+        '</div>';*/
         
         angular.element(".walloftext").html('<div class="h1">1GAM Sorter: Filter by tag</div>'+
             '<div class="p"><form ng-submit="filterByTag()">'+

@@ -58,13 +58,18 @@ function initSorter(angular, _) {
             angular.forEach(monthData.games, function(game) {
                 _.defer(function() {
                     var $game = angular.element(game);
+                    
+                    var tags = $game.find(".gatags").text()
+                    tags = tags.split(",");
+                    tags = tags.split(" ");
+                    
                     games.push({
                         link: $game.find(".ga").attr("href"),
                         title: $game.find(".ga").attr("title"),
                         name: $game.find(".ganame").text(),
                         description: $game.find(".gabyli").text(),
                         credits: $game.find(".gacred").text(),
-                        tags: $game.find(".gatags").text().split(",").split(" "),
+                        tags: tags,
                         about: $game.find(".gabout").text(),
                         author: $game.find(".gauser a").text(),
                         authorLink: $game.find(".gauser a").attr("href"),

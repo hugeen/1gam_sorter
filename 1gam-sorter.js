@@ -74,7 +74,7 @@ function initSorter(angular, _) {
                         month: monthData.month
                     });
                     gamesProcessed++;
-                    processedBy100++;
+                    procBy100++;
                     if(procBy100 === 100 || gamesProcessed === totalGames) {
                         angular.element("#gamesProcessed").text(gamesProcessed+"/"+totalGames);
                         procBy100 = 0

@@ -46,7 +46,7 @@ function initSorter(angular, _) {
         
     }
     
-    angular.element("#bootl").append("<a href='https://github.com/hugeen/1gam_sorter' id='gamesProcessed'>1GAM Sorter: Processing games data.</a>");
+    angular.element(".walloftext .h1:first").html("<a href='https://github.com/hugeen/1gam_sorter' id='gamesProcessed'>1GAM Sorter: Processing games data.</a>");
     var games = [];
     
     var gamesProcessed = 0;
@@ -73,7 +73,7 @@ function initSorter(angular, _) {
                     });
                     gamesProcessed++;
                     if(gamesProcessed === totalGames) {
-                        angular.element("#gamesProcessed").text("1GAM Sorter: Ready!");
+                        angular.element(".walloftext .h1:first").html("1GAM Sorter: Ready!");
                         initializeSorter();
                     }
                 });
@@ -98,7 +98,7 @@ function initSorter(angular, _) {
                     var fullListFiltered = _.filter(games, function(game) {
                        return matcher.test(game.tags);
                     });
-                    $scope.games = fullListFiltered.splice(0, 10);
+                    $scope.games = fullListFiltered;
                 }
             }
             $scope.filterByTag();
@@ -118,12 +118,11 @@ function initSorter(angular, _) {
             '</span>'+
         '</div>';
         
-        angular.element(".walloftext").html('<h1>Filter by tag</h1>'+
-            '<form class="center" ng-submit="filterByTag()">'+
-                '<input type="text" ng-model="tag" size="30" value="2d">'+
+        angular.element(".walloftext").html('<div class="h1">1GAM Sorter: Filter by tag</div>'+
+            '<div class="p"><form ng-submit="filterByTag()">'+
+                '<input type="text" ng-model="tag" size="30">'+
                 '<input type="submit" value="Filter">'+
-            '</form>>'+
-        '</h1>');
+            '</form></div>');
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);

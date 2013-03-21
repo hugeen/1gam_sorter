@@ -24,14 +24,13 @@ function initSorter(angular, _) {
     
     var h1count = angular.element(".walloftext .h1").length;
     var gamesByMonth = [];
-    
-    console.log(h1count);
+
     for(var i = 0; i < h1count-1; i++) {
         gamesByMonth.push(angular.element(".walloftext .h1:last ~ .gadiv"));
         angular.element(".walloftext .h1:last ~ .gadiv").remove();
         angular.element(".walloftext .h1:last").remove();
     }
-    console.log(gamesByMonth);
+    window.gamesByMonth = gamesByMonth; 
     
 }
  

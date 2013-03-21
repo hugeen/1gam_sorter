@@ -49,27 +49,43 @@ function initSorter(angular, _) {
     
     angular.element("#bootl").append("<a href='#' id='gamesProcessed'></a>");
     var games = [];
-    var gamesProcessed = 0;
-    angular.forEach(gamesByMonth[0].games, function(game) {
-        _.defer(function() {
-            var $game = angular.element(game);
-            games.push({
-                link: $game.find(".ga").attr("href"),
-                title: $game.find(".ga").attr("title"),
-                name: $game.find(".ganame").text(),
-                description: $game.find(".gabyli").text(),
-                credits: $game.find(".gacred").text(),
-                tags: $game.find(".gatags").text(),
-                about: $game.find(".gabout").text(),
-                author: $game.find(".gauser a").text(),
-                authorLink: $game.find(".gauser a").attr("href"),
-                icon: $game.find(".gaicon").attr("src")
-            });
-            gamesProcessed++;
-            angular.element("#gamesProcessed").text(gamesProcessed+"/"+totalGames);
-        });
-    });
     
+    var gamesProcessed = 0;
+    var procBy100 = 0;
+    
+    angular.forEach(gamesByMonth, function(monthData) {
+        
+        _.defer(function() {
+            
+            angular.forEach(monthData.games, function(game) {
+                _.defer(function() {
+                    var $game = angular.element(game);
+                    games.push({
+                        link: $game.find(".ga").attr("href"),
+                        title: $game.find(".ga").attr("title"),
+                        name: $game.find(".ganame").text(),
+                        description: $game.find(".gabyli").text(),
+                        credits: $game.find(".gacred").text(),
+                        tags: $game.find(".gatags").text(),
+                        about: $game.find(".gabout").text(),
+                        author: $game.find(".gauser a").text(),
+                        authorLink: $game.find(".gauser a").attr("href"),
+                        icon: $game.find(".gaicon").attr("src"),
+                        month: monthData.month
+                    });
+                    gamesProcessed++;
+                    processedBy100++;
+                    if(procBy100 === 100 || gamesProcessed === totalGames) {
+                        angular.element("#gamesProcessed").text(gamesProcessed+"/"+totalGames);
+                        procBy100 = 0
+                    }
+                });
+            });
+            
+        });
+        
+    });
+
     window.games = games;
     window.gamesByMonth = gamesByMonth;
     window.totalGames = totalGames;

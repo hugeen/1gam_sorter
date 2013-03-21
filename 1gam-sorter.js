@@ -105,37 +105,13 @@ function initSorter(angular, _) {
         }
         
         var template = 
-        '<table class="table table-striped" width="768">'+
-            '<thead width="768">'+
-                '<tr width="768">'+
-                    '<th width="768">Name</td>'+
-                    '<th width="768">Description</td>'+
-                    '<th width="768">Tags</td>'+
-                    '<th width="768">Author</a></td>'+
-                '</tr>'+
-            '</thead>'+
-            '<tbody width="768">'+
-                '<tr width="768" ng-repeat="game in games">'+
-                    '<td width="768"><a href="{{ game.link }}">{{ game.name }}</a></td>'+
-                    '<td width="768">{{ game.description }}</td>'+
-                    '<td width="768">{{ game.tags }}</td>'+
-                    '<td width="768"><a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a></td>'+
-                '</tr>'+
-            '</tbody>'+
-        '</table>'+
-        /*'<div class="gadiv" ng-repeat="game in games">'+
-            '<a class="ga" title="{{ game.title }}" href="{{ game.link }}">'+
-                '<img class="gaicon" src="{{ game.icon }}">'+
-                '<span class="ganame">{{ game.name }}</span>'+
-                '<span class="gabyli">{{ game.description }}</span>'+
-                '<span class="gacred">{{ game.credits }}</span>'+
-                '<span class="gatags">{{ game.tags }}</span>'+
-                '<span class="gabout">{{ game.about }}</span>'+
-            '</a>'+
-            '<span class="gauser">'+
-                '<a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a>'+
-            '</span>'+
-        '</div>';*/
+
+        '<div class="gadiv" ng-repeat="game in games">'+
+            '<span><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span> :<br>'+
+            '<span>Description: {{ game.description }}</span><br>'+
+            '<span>Tags: {{ game.tags }}</span><br>'+
+            '<span><a href="{{ game.authorLink }}" title="Click to view author profile">By : {{ game.author }}</a></span>'+
+        '</div>';
         
         angular.element(".walloftext").html('<div class="h1">1GAM Sorter: Filter by tag</div>'+
             '<div class="p"><form ng-submit="filterByTag()">'+

@@ -4,6 +4,15 @@
   width: 50%;
   margin: 0 0 0 0;
   clear: none;
-  font-size: 13px;
+  font-size: 12px;
   height: 90px;
+  padding: 10px 0;
+}
+
+.result-blocks span {
+  font-size: 12px;
+}
+
+.result-blocks a {
+  font-size: 13px;
 }

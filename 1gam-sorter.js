@@ -95,9 +95,10 @@ function initSorter(angular, _) {
                     $scope.games = games;
                 } else {
                     var matcher = new RegExp($scope.tag,"i");
-                    $scope.games = _.filter(games, function(game) {
+                    var fullListFiltered = _.filter(games, function(game) {
                        return matcher.test(game.tags);
                     });
+                    $scope.games = fullListFiltered.splice(0, 10);
                 }
             }
         }

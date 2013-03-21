@@ -58,16 +58,13 @@ function initSorter(angular, _) {
             angular.forEach(monthData.games, function(game) {
                 _.defer(function() {
                     var $game = angular.element(game);
-                    
-                    var tags = $game.find(".gatags").text().split(",");
-                    tags = tags.split(" ");
                     games.push({
                         link: $game.find(".ga").attr("href"),
                         title: $game.find(".ga").attr("title"),
                         name: $game.find(".ganame").text(),
                         description: $game.find(".gabyli").text(),
                         credits: $game.find(".gacred").text(),
-                        tags: tags,
+                        tags: $game.find(".gatags").text(),
                         about: $game.find(".gabout").text(),
                         author: $game.find(".gauser a").text(),
                         authorLink: $game.find(".gauser a").attr("href"),
@@ -97,12 +94,14 @@ function initSorter(angular, _) {
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
                 } else {
+                    var matcher = new RegExp($scope.tag,"i");
                     var fullListFiltered = _.filter(games, function(game) {
-                       return _.contains(game.tags, $scope.tag);
+                       return matcher.test(game.tags);
                     });
-                   $scope.games = fullListFiltered.splice(0, 10);
+                    $scope.games = fullListFiltered.splice(0, 10);
                 }
             }
+            $scope.filterByTag();
         }
         
         var template = '<div class="gadiv" ng-repeat="game in games">'+
@@ -119,11 +118,12 @@ function initSorter(angular, _) {
             '</span>'+
         '</div>';
         
-        angular.element(".walloftext").html('<h1> Filter by tag </h1>'+
-            '<form ng-submit="filterByTag()" class="center">'+
-                '<input type="text" ng-model="tag" size="30">'+
+        angular.element(".walloftext").html('<h1>Filter by tag</h1>'+
+            '<form class="center" ng-submit="filterByTag()">'+
+                '<input type="text" ng-model="tag" size="30" value="2d">'+
                 '<input type="submit" value="Filter">'+
-            '</form>');
+            '</form>>'+
+        '</h1>');
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);

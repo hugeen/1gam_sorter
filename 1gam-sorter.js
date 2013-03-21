@@ -12,11 +12,7 @@ document.getElementsByTagName('head')[0].appendChild(s);
  */
  
 function initSorter(angular, _) {
-    
-    angular.element("body").attr({
-        "ng-app": "sorter"
-    });
-    
+
     var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     
     // Remove the last h1
@@ -24,7 +20,6 @@ function initSorter(angular, _) {
     
     var h1count = angular.element(".walloftext .h1").length;
     var gamesByMonth = [];
-    
     
     var totalGames = 0;
     for(var i = 0; i < h1count-1; i++) {
@@ -75,6 +70,7 @@ function initSorter(angular, _) {
                     gamesProcessed++;
                     if(gamesProcessed === totalGames) {
                         angular.element("#gamesProcessed").text("1GAM Sorter: Ready!");
+                        initializeSorter();
                     }
                 });
             });
@@ -82,7 +78,55 @@ function initSorter(angular, _) {
         });
         
     });
-
+    
+    
+    function initializeSorter() {
+        var module = angular.module('sorter', []);
+        angular.element("body").attr({
+            "ng-app": "sorter"
+        });
+        
+        window.SorterCtrl = function($scope) {
+            $scope.games = games;
+            $scope.tag = "";
+            $scope.filterByTag = function() {
+                if(_.isEmpty($scope.tag)) {
+                    $scope.games = games;
+                } else {
+                    var matcher = new RegExp($scope.tag,"i");
+                    $scope.games = _.filter(games, function(game) {
+                       return matcher.test(game.tags);
+                    });
+                }
+            }
+        }
+        
+        var template = '<div class="gadiv" ng-repeat="game in games">'+
+            '<a class="ga" title="{{ game.title }}" href="{{ game.link }}">'+
+                '<img class="gaicon" src="{{ game.icon }}">'+
+                '<span class="ganame">{{ game.name }}</span>'+
+                '<span class="gabyli">{{ game.description }}</span>'+
+                '<span class="gacred">{{ game.credits }}</span>'+
+                '<span class="gatags">{{ game.tags }}</span>'+
+                '<span class="gabout">{{ game.about }}</span>'+
+            '</a>'+
+            '<span class="gauser">'+
+                '<a href="{{ game.authorLink }}" title="Click to view author profile">{{ game.author }}</a>'+
+            '</span>'+
+        '</div>';
+        
+        angular.element(".walloftext").html('<h1> Filter by tag'+
+            '<form ng-submit="filterByTag()">'+
+                '<input type="text" ng-model="tag" size="30">'+
+                '<input type="submit" value="Filter">'+
+            '</form>'+
+        '</h1>');
+        
+        angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
+        angular.element(".walloftext").append(template);
+        
+    }
+    
     window.games = games;
     window.gamesByMonth = gamesByMonth;
     window.totalGames = totalGames;

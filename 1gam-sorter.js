@@ -68,7 +68,7 @@ function initSorter(angular, _) {
                         about: $game.find(".gabout").text(),
                         author: $game.find(".gauser a").text(),
                         authorLink: $game.find(".gauser a").attr("href"),
-                        icon: $game.find(".gaicon").attr("src"),
+                        icon: $game.find(".gaicon").first().data("original"),
                         month: monthData.month
                     });
                     gamesProcessed++;
@@ -107,6 +107,7 @@ function initSorter(angular, _) {
         var template = 
 
         '<div class="p result-blocks" ng-repeat="game in games">'+
+            '<img src="{{ game.icon }}" />'+
             '<span><a title="{{ game.title }}" href="{{ game.link }}">{{ game.name }}</a></span><br>'+
             '<span><b>Description:</b> {{ game.description }}</span><br>'+
             '<span><b>Tags:</b> {{ game.tags }}</span><br>'+

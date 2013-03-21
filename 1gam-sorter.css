@@ -5,7 +5,7 @@
   margin: 0 0 0 0;
   clear: none;
   font-size: 11px;
-  height: 80px;
+  height: 60px;
   padding: 10px 0;
   line-height: 11px !important;
   overflow: auto;
@@ -20,4 +20,8 @@
 .result-blocks a {
   font-size: 13px;
   line-height: 12px !important;
+}
+
+.result-blocks img {
+  position: absolute;
 }

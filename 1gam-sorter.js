@@ -26,8 +26,18 @@ function initSorter(angular, _) {
     var gamesByMonth = [];
 
     for(var i = 0; i < h1count-1; i++) {
-        gamesByMonth.push(angular.element(".walloftext .h1:last ~ .gadiv"));
-        angular.element(".walloftext .h1:last ~ .gadiv").remove();
+        
+        var $gadivs = angular.element(".walloftext .h1:last ~ div.gadiv");
+        var $theme = angular.element(".walloftext .h1:last ~ p.center:first");
+        
+        gamesByMonth.push({
+            month: months[i],
+            theme: $theme.text(),
+            games: $gadivs,
+        });
+        
+        $gadivs.remove();
+        $theme.remove();
         angular.element(".walloftext .h1:last").remove();
     }
     window.gamesByMonth = gamesByMonth; 

@@ -107,7 +107,7 @@ function initSorter(angular, _) {
         var template = 
         '<table class="table table-striped">'+
             '<thead>'+
-                '<tr class="gadiv" ng-repeat="game in games">'+
+                '<tr>'+
                     '<th>Name</td>'+
                     '<th>Description</td>'+
                     '<th>Tags</td>'+
@@ -115,7 +115,7 @@ function initSorter(angular, _) {
                 '</tr>'+
             '</thead>'+
             '<tbody>'+
-                '<tr class="gadiv" ng-repeat="game in games">'+
+                '<tr ng-repeat="game in games">'+
                     '<td><a href="{{ game.link }}">{{ game.name }}</a></td>'+
                     '<td>{{ game.description }}</td>'+
                     '<td>{{ game.tags }}</td>'+

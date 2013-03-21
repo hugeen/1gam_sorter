@@ -22,10 +22,12 @@ function initSorter(angular, _) {
     // Remove the last h1
     angular.element(".walloftext .h1:last").remove();
     
-    var h1count = angular.element(".walloftext .h1").length;
+    var h1count = angular.element(".walloftext .h1:last").length;
     var gamesByMonth = [];
-    for(var i = 0; i < h1count; i++) {
-        gamesByMonth.push(angular.element(".walloftext .h1:last ~ .gadiv"));
+    for(var i = 0; i < h1coun-1t; i++) {
+        var $gadivs = angular.element(".walloftext .h1:last ~ .gadiv");
+        gamesByMonth.push($gadivs);
+        $gadivs.remove();
         angular.element(".walloftext .h1:last").remove();
     }
     console.log(gamesByMonth);

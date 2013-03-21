@@ -88,9 +88,8 @@ function initSorter(angular, _) {
         
         
         window.SorterCtrl = function($scope) {
-            console.log("test")
             $scope.games = games;
-            $scope.tag = "";
+            $scope.tag = "2d";
             $scope.filterByTag = function() {
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
@@ -117,11 +116,11 @@ function initSorter(angular, _) {
             '</span>'+
         '</div>';
         
-        angular.element(".walloftext").html('<h1> Filter by tag'+
-            '<form ng-submit="filterByTag()">'+
+        angular.element(".walloftext").html('<h1> Filter by tag <h1>'+
+            '<p class="center"><form ng-submit="filterByTag()">'+
                 '<input type="text" ng-model="tag" size="30">'+
                 '<input type="submit" value="Filter">'+
-            '</form>'+
+            '</form></p>'+
         '</h1>');
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });

@@ -24,7 +24,9 @@ function initSorter(angular, _) {
     
     var h1count = angular.element(".walloftext .h1").length;
     var gamesByMonth = [];
-
+    
+    
+    var totalGames = 0;
     for(var i = 0; i < h1count-1; i++) {
         
         var $gadivs = angular.element(".walloftext .h1:last ~ div.gadiv");
@@ -36,12 +38,16 @@ function initSorter(angular, _) {
             games: $gadivs,
         });
         
+        totalGames += $gadivs.length;
+        
         $gadivs.remove();
         $theme.remove();
+        
         angular.element(".walloftext .h1:last").remove();
+        
     }
     window.gamesByMonth = gamesByMonth; 
-    
+    window.totalGames = totalGames;
 }
  
 /*

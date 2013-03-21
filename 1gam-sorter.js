@@ -81,10 +81,7 @@ function initSorter(angular, _) {
     
     
     function initializeSorter() {
-        var module = angular.module('sorter', []);
-        angular.element("body").attr({
-            "ng-app": "sorter"
-        });
+        
         
         window.SorterCtrl = function($scope) {
             $scope.games = games;
@@ -124,6 +121,11 @@ function initSorter(angular, _) {
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);
+        
+        var module = angular.module('sorter', []);
+        angular.element("body").attr({
+            "ng-app": "sorter"
+        });
         
     }
     

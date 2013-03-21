@@ -64,7 +64,7 @@ function initSorter(angular, _) {
                         name: $game.find(".ganame").text(),
                         description: $game.find(".gabyli").text(),
                         credits: $game.find(".gacred").text(),
-                        tags: $game.find(".gatags").text(),
+                        tags: $game.find(".gatags").text().split(",").split(" "),
                         about: $game.find(".gabout").text(),
                         author: $game.find(".gauser a").text(),
                         authorLink: $game.find(".gauser a").attr("href"),
@@ -94,11 +94,10 @@ function initSorter(angular, _) {
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
                 } else {
-                    var matcher = new RegExp($scope.tag,"i");
                     var fullListFiltered = _.filter(games, function(game) {
-                       return matcher.test(game.tags);
+                       return _.contains(game.tags, $scope.tag);
                     });
-                    $scope.games = fullListFiltered.splice(0, 10);
+                   $scope.games = fullListFiltered.splice(0, 10);
                 }
             }
         }
@@ -117,12 +116,11 @@ function initSorter(angular, _) {
             '</span>'+
         '</div>';
         
-        angular.element(".walloftext").html('<h1> Filter by tag <h1>'+
+        angular.element(".walloftext").html('<h1> Filter by tag </h1>'+
             '<p class="center"><form ng-submit="filterByTag()">'+
                 '<input type="text" ng-model="tag" size="30">'+
                 '<input type="submit" value="Filter">'+
-            '</form></p>'+
-        '</h1>');
+            '</form></p>');
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);

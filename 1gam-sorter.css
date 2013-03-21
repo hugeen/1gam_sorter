@@ -1,0 +1,9 @@
+.result-blocks {
+  display: block;
+  float: left;
+  width: 50%;
+  margin: 0 0 0 0;
+  clear: none;
+  font-size: 13px;
+  height: 90px;
+}

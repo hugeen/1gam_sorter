@@ -59,9 +59,7 @@ function initSorter(angular, _) {
                 _.defer(function() {
                     var $game = angular.element(game);
                     
-                    var tags = $game.find(".gatags").text()
-                    tags = tags.split(",");
-                    tags = tags.split(" ");
+                    var tags = $game.find(".gatags").text().split(",");
                     
                     games.push({
                         link: $game.find(".ga").attr("href"),

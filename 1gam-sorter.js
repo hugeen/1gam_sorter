@@ -60,7 +60,7 @@ function initSorter(angular, _) {
                     var $game = angular.element(game);
                     
                     var tags = $game.find(".gatags").text().split(",");
-                    
+                    tags = tags.split(" ");
                     games.push({
                         link: $game.find(".ga").attr("href"),
                         title: $game.find(".ga").attr("title"),
@@ -120,10 +120,10 @@ function initSorter(angular, _) {
         '</div>';
         
         angular.element(".walloftext").html('<h1> Filter by tag </h1>'+
-            '<p class="center"><form ng-submit="filterByTag()">'+
+            '<form ng-submit="filterByTag()" class="center">'+
                 '<input type="text" ng-model="tag" size="30">'+
                 '<input type="submit" value="Filter">'+
-            '</form></p>');
+            '</form>');
         
         angular.element(".walloftext").attr({ "ng-controller": "SorterCtrl" });
         angular.element(".walloftext").append(template);

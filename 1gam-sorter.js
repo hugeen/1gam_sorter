@@ -90,13 +90,14 @@ function initSorter(angular, _) {
         window.SorterCtrl = function($scope) {
             $scope.games = games;
             $scope.tag = "2d";
+            $scope.month = "january";
             $scope.filterByTag = function() {
                 if(_.isEmpty($scope.tag)) {
                     $scope.games = games;
                 } else {
                     var matcher = new RegExp($scope.tag,"i");
                     var fullListFiltered = _.filter(games, function(game) {
-                       return matcher.test(game.tags);
+                       return matcher.test(game.tags) && $scope.month === game.month;
                     });
                     $scope.games = fullListFiltered;
                 }
@@ -116,6 +117,20 @@ function initSorter(angular, _) {
         angular.element(".walloftext").html('<div class="h1">1GAM Sorter: Filter by tag</div>'+
             '<div class="p"><form ng-submit="filterByTag()">'+
                 '<input type="text" ng-model="tag" size="30">'+
+                '<select ng-model="month">'+
+                    '<option value="january">January</option>'+
+                    '<option value="february">February</option>'+
+                    '<option value="march">March</option>'+
+                    '<option value="april">April</option>'+
+                    '<option value="may">May</option>'+
+                    '<option value="june">June</option>'+
+                    '<option value="july">July</option>'+
+                    '<option value="august">August</option>'+
+                    '<option value="september">September</option>'+
+                    '<option value="october">October</option>'+
+                    '<option value="november">December</option>'+
+                    '<option value="december">December</option>'+
+                '</select>'+
                 '<input type="submit" value="Filter">'+
             '</form></div>');
         
